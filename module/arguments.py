@@ -28,7 +28,6 @@ def compose_default_arguments(values):
 def read_arguments(arguments, default_values):
     options = compose_options(default_values)
     def_arguments = compose_default_arguments(default_values)
-    pprint.pprint(def_arguments)
     try:
         opts, args = getopt.getopt(arguments, "", options)
     except getopt.GetoptError as err:

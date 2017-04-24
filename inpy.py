@@ -1,7 +1,8 @@
 import sys
 
 import defaults
-from module import test, arguments, configuration
+from module import arguments
+from module import configuration
 
 ARGUMENTS = {}
 CONFIG = {}
@@ -15,9 +16,9 @@ def process_config_file():
     return status
 
 def main():
-    test.test()
-    sys.exit()
     process_arguments()
+    print ARGUMENTS
+    sys.exit()
     status = process_config_file()
     print status
     if not status == "OK":
