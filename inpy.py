@@ -1,9 +1,7 @@
-import getopt
 import sys
-import pprint
-import arguments
+
 import defaults
-import configuration
+from lib import test, arguments, configuration
 
 ARGUMENTS = {}
 CONFIG = {}
@@ -13,13 +11,19 @@ def process_arguments():
     ARGUMENTS = arguments.read_arguments(sys.argv[1:], defaults.DEFAULT_ARGUMENTS)
 
 def process_config_file():
-    status, config = configuration.process_config_file(ARGUMENTS['config-file'])
-    print status
+    status, CONFIG = configuration.process_config_file(ARGUMENTS['config-file'])
+    return status
 
 def main():
+    test.test()
+    sys.exit()
     process_arguments()
-    process_config_file()
-    print ARGUMENTS
+    status = process_config_file()
+    print status
+    if not status == "OK":
+        print (status)
+        sys.exit(3)
+    print CONFIG
 
 if __name__ == "__main__":
     main()
