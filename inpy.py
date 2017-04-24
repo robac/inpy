@@ -1,7 +1,7 @@
 import sys
 
 import defaults
-from lib import test, arguments, configuration
+from module import test, arguments, configuration
 
 ARGUMENTS = {}
 CONFIG = {}
