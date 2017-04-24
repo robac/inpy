@@ -1,14 +1,14 @@
 DEFAULT_ARGUMENTS = {
    'config-file' : 
 	{
-		'value' : '/etc/inpy/inpy.conf',
+		'value' : '/etc/inpy/config.yml',
 		'description' : 'path to config file',
-		'argument' : True
+		'has-argument' : True
 	},
    'log-file' : 
 	{
 		'value' : '/var/log/inpy.log',
 		'description' : 'path to log file',
-		'argument' : False
+		'has-argument' : False
 	}
 }
