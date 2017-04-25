@@ -1,0 +1,8 @@
+general:
+watch:
+  - hello:
+      directory : /tmp/inpy
+      recursive : True
+  - hello2:
+      directory : /tmp/inpy2
+      recursive : False
