@@ -17,8 +17,7 @@ def process_config_file():
 
 def main():
     process_arguments()
-    print ARGUMENTS
-    sys.exit()
+
     status = process_config_file()
     print status
     if not status == "OK":
