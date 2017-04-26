@@ -35,9 +35,6 @@ def main():
     print CONFIG
     watch()
     """
-    logger.init_syslogger(constants.LOG_DEBUG)
-    logger.init_filelogger('/tmp/inpy.log', constants.LOG_DEBUG)
-    logger.log(constants.LOG_CRITICAL, "hello inpy", constants.LOGTO_FILELOG | constants.LOGTO_SYSLOG)
 
 if __name__ == "__main__":
     main()
