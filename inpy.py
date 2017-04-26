@@ -15,13 +15,13 @@ def process_arguments():
     ARGUMENTS = arguments.read_arguments(sys.argv[1:], defaults.DEFAULT_ARGUMENTS)
 
 def process_config_file():
+    global CONFIG
     status, CONFIG = configuration.process_config_file(ARGUMENTS[constants.CONFIG_FILE_ARGUMENT])
     return status
 
 def watch():
-    f
-    for key, value in CONFIG[constants.WATCH_SECTION].iteritems():
-        print(i)
+    for key in CONFIG[constants.WATCH_SECTION]:
+        print(key)
 
 def main():
     process_arguments()

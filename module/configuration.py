@@ -14,7 +14,7 @@ def check_config(config):
     return "OK"
 
 def process_config_file(file):
-    config, status = read_config_file(file)
+    status, config = read_config_file(file)
     if not status == "OK":
         return status, config
     valid = check_config(config)
