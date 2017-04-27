@@ -4,10 +4,24 @@ import logger
 
 watches = []
 
+
+def add_watches(adapter, watch_config):
+    for watch_key in watch_config.keys():
+        watch_item = watch_config[watch_key]
+        if watch_item[constants.CONF_ITEM_RECURSIVE]:
+            add_recursive_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
+        else:
+            add_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
+
+
 def add_watch(adapter, path):
     adapter.add_watch(path)
     watches.append(path)
     logger.log(constants.LOG_INFO, "added watch " + path)
+
+def add_recursive_watch(adapter, path):
+    return 0
+
 
 def remove_watches(adapter):
     for path in watches:
@@ -17,9 +31,7 @@ def remove_watches(adapter):
 
 def watch(watch_config):
     adapter = inotify.adapters.Inotify()
-    for watch_key in watch_config.keys():
-        watch_item = watch_config[watch_key]
-        add_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
+    add_watches(adapter, watch_config)
 
     try:
         for event in adapter.event_gen():
@@ -27,10 +39,7 @@ def watch(watch_config):
                 (header, type_names, watch_path, filename) = event
                 logger.log(constants.LOG_INFO, watch_path+filename)
     finally:
-        for watch_key in watch_config.keys():
-            watch_item = watch_config[watch_key]
-            remove_watches(adapter)
+        remove_watches(adapter)
 
-    #for i in watch_config.keys():
 
 

@@ -3,6 +3,7 @@ ARGUMENT_CONFIG_FILE = 'config-file'
 CONF_SEC_WATCH      = 'watch'
 CONF_SEC_GENERAL    = 'general'
 CONF_ITEM_DIRECTORY = 'directory'
+CONF_ITEM_RECURSIVE = 'recursive'
 
 LOG_CRITICAL = 50
 LOG_ERROR = 40

@@ -4,5 +4,5 @@ watch:
       directory : /tmp
       recursive : True
   - hello2:
-      directory : /etc
+      directory : /root
       recursive : True
