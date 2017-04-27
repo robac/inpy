@@ -6,6 +6,7 @@ from module import configuration
 from module import logger
 from module import constants
 from module import watch
+import inotify.adapters
 
 
 ARGUMENTS = {}
@@ -21,14 +22,18 @@ def process_config_file():
     return status
 
 def main():
-    process_arguments()
+    logger.init_syslogger(constants.LOG_INFO)
+    logger.log(constants.LOG_INFO, "start inpy")
 
+    process_arguments()
     status = process_config_file()
     print status
     if not status == "OK":
         print (status)
         sys.exit(3)
     watch.set_watch(CONFIG[constants.CONF_SEC_WATCH])
+
+    logger.log(constants.LOG_INFO, "close inpy")
 
 
 if __name__ == "__main__":
