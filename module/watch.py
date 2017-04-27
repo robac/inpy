@@ -1,10 +1,11 @@
 import constants
 import inotify.adapters
+import inotify.constants
 import logger
 import os
 
-watches = []
-
+watches = {}
+kill_now = False
 
 def add_watches(adapter, watch_config):
     for watch_key in watch_config.keys():
@@ -16,16 +17,11 @@ def add_watches(adapter, watch_config):
     print(watches)
 
 
-def add_watch(adapter, path, recursive = None):
-    if recursive is None:
-        recursive = False
-    adapter.add_watch(path)
-    watches.append(
-        {
-            'path' : path,
-            'recursive' : recursive
+def add_watch(adapter, path, recursive=False):
+    adapter.add_watch(path, inotify.constants.IN_CREATE | inotify.constants.IN_ISDIR)
+    watches[path] = {
+            'recursive': recursive
         }
-    )
     logger.log(constants.LOG_INFO, "added watch " + path)
 
 
@@ -53,11 +49,17 @@ def remove_watches(adapter):
 
 
 def watch_loop(adapter):
+    print "loop"
     try:
         for event in adapter.event_gen():
             if event is not None:
                 (header, type_names, watch_path, filename) = event
-                #logger.log(constants.LOG_INFO, watch_path + filename)
+                if (header.mask & (inotify.constants.IN_ISDIR | inotify.constants.IN_CREATE)) > 0:
+                    if watches[watch_path]['recursive']:
+                        add_watch(adapter, os.path.join(watch_path, filename))
+
+
+                #print( header)
     finally:
         print "END END END"
 
@@ -66,6 +68,7 @@ def watch_loop(adapter):
 def watch(watch_config):
     adapter = inotify.adapters.Inotify()
     add_watches(adapter, watch_config)
+
     print(watches)
 
     try:

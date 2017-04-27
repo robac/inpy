@@ -2,10 +2,10 @@ general:
   max-directories : 100
 watch:
   - hello:
-      directory : /tmp
+      directory : /var/lib/tftpboot
       recursive : True
       max-depth : 2
 
-  - hello2:
-      directory : /root
-      recursive : False
+  #- hello2:
+   #   directory : /root
+    #z  recursive : False
