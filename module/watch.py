@@ -15,10 +15,18 @@ def add_watches(adapter, watch_config):
             add_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
 
 
-def add_watch(adapter, path):
+def add_watch(adapter, path, recursive = None):
+    if recursive is None:
+        recursive = False
     adapter.add_watch(path)
-    watches.append(path)
+    watches.append(
+        {
+            'path' : path,
+            'recursive' : recursive
+        }
+    )
     logger.log(constants.LOG_INFO, "added watch " + path)
+
 
 def add_recursive_watch(adapter, path):
     q = [path]
@@ -42,15 +50,21 @@ def remove_watches(adapter):
         logger.log(constants.LOG_INFO, "removed watch " + path)
 
 
+def watch_loop(adapter):
+    for event in adapter.event_gen():
+        if event is not None:
+            (header, type_names, watch_path, filename) = event
+            logger.log(constants.LOG_INFO, watch_path + filename)
+
+
+
 def watch(watch_config):
     adapter = inotify.adapters.Inotify()
     add_watches(adapter, watch_config)
+    print(watches)
 
     try:
-        for event in adapter.event_gen():
-            if event is not None:
-                (header, type_names, watch_path, filename) = event
-                logger.log(constants.LOG_INFO, watch_path+filename)
+        watch_loop(adapter)
     finally:
         remove_watches(adapter)
 
