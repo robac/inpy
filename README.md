@@ -5,8 +5,9 @@
     - two main sections: general (general settings, log file etc.), watch (list of directories to watch)
 
 general (keys):
-    * log-file: string; log file location
-    * syslog: boolean;
+    * log-file : string; log file location
+    * syslog : boolean;
+    * max-directories : number; maximum number of watched directories; 0 = unlimited
 
 watch (list):
     * name of item

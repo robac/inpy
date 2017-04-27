@@ -13,6 +13,7 @@ def add_watches(adapter, watch_config):
             add_recursive_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
         else:
             add_watch(adapter, watch_item[constants.CONF_ITEM_DIRECTORY])
+    print(watches)
 
 
 def add_watch(adapter, path, recursive = None):
@@ -34,27 +35,31 @@ def add_recursive_watch(adapter, path):
         current_path = q[0]
         del q[0]
 
-        add_watch(adapter, current_path)
+        add_watch(adapter, current_path, True)
 
         for filename in os.listdir(current_path):
             entry_filepath = os.path.join(current_path, filename)
             if os.path.isdir(entry_filepath) is False:
                 continue
-
             q.append(entry_filepath)
 
 
 def remove_watches(adapter):
-    for path in watches:
-        adapter.remove_watch(constants.CONF_ITEM_DIRECTORY)
+    print("watche remove")
+    for entry in watches:
+        path = entry['path']
+        adapter.remove_watch(path)
         logger.log(constants.LOG_INFO, "removed watch " + path)
 
 
 def watch_loop(adapter):
-    for event in adapter.event_gen():
-        if event is not None:
-            (header, type_names, watch_path, filename) = event
-            logger.log(constants.LOG_INFO, watch_path + filename)
+    try:
+        for event in adapter.event_gen():
+            if event is not None:
+                (header, type_names, watch_path, filename) = event
+                #logger.log(constants.LOG_INFO, watch_path + filename)
+    finally:
+        print "END END END"
 
 
 
@@ -66,6 +71,7 @@ def watch(watch_config):
     try:
         watch_loop(adapter)
     finally:
+        logger.log(constants.LOG_CRITICAL, "END END END")
         remove_watches(adapter)
 
 

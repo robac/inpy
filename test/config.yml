@@ -1,8 +1,11 @@
 general:
+  max-directories : 100
 watch:
   - hello:
       directory : /tmp
       recursive : True
+      max-depth : 2
+
   - hello2:
       directory : /root
       recursive : False
