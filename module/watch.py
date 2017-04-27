@@ -49,19 +49,16 @@ def remove_watches(adapter):
 
 
 def watch_loop(adapter):
-    print "loop"
     try:
         for event in adapter.event_gen():
             if event is not None:
                 (header, type_names, watch_path, filename) = event
                 if (header.mask & (inotify.constants.IN_ISDIR | inotify.constants.IN_CREATE)) > 0:
                     if watches[watch_path]['recursive']:
-                        add_watch(adapter, os.path.join(watch_path, filename))
+                        add_watch(adapter, os.path.join(watch_path, filename), True)
 
-
-                #print( header)
     finally:
-        print "END END END"
+        None
 
 
 
