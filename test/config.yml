@@ -2,7 +2,7 @@ general:
 watch:
   - hello:
       directory : /tmp
-      recursive : True
+      recursive : False
   - hello2:
       directory : /root
       recursive : True

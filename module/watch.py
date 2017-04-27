@@ -1,6 +1,7 @@
 import constants
 import inotify.adapters
 import logger
+import os
 
 watches = []
 
@@ -20,7 +21,19 @@ def add_watch(adapter, path):
     logger.log(constants.LOG_INFO, "added watch " + path)
 
 def add_recursive_watch(adapter, path):
-    return 0
+    q = [path]
+    while q:
+        current_path = q[0]
+        del q[0]
+
+        add_watch(adapter, current_path)
+
+        for filename in os.listdir(current_path):
+            entry_filepath = os.path.join(current_path, filename)
+            if os.path.isdir(entry_filepath) is False:
+                continue
+
+            q.append(entry_filepath)
 
 
 def remove_watches(adapter):
