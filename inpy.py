@@ -31,7 +31,7 @@ def main():
     if not status == "OK":
         print (status)
         sys.exit(3)
-    watch.set_watch(CONFIG[constants.CONF_SEC_WATCH])
+    watch.watch(CONFIG[constants.CONF_SEC_WATCH])
 
     logger.log(constants.LOG_INFO, "close inpy")
 

@@ -2,6 +2,7 @@ ARGUMENT_CONFIG_FILE = 'config-file'
 
 CONF_SEC_WATCH      = 'watch'
 CONF_SEC_GENERAL    = 'general'
+CONF_ITEM_DIRECTORY = 'directory'
 
 LOG_CRITICAL = 50
 LOG_ERROR = 40
