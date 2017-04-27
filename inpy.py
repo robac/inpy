@@ -5,6 +5,7 @@ from module import arguments
 from module import configuration
 from module import logger
 from module import constants
+from module import watch
 
 
 ARGUMENTS = {}
@@ -16,15 +17,10 @@ def process_arguments():
 
 def process_config_file():
     global CONFIG
-    status, CONFIG = configuration.process_config_file(ARGUMENTS[constants.CONFIG_FILE_ARGUMENT])
+    status, CONFIG = configuration.process_config_file(ARGUMENTS[constants.ARGUMENT_CONFIG_FILE])
     return status
 
-def watch():
-    for key in CONFIG[constants.WATCH_SECTION]:
-        print(key)
-
 def main():
-    """
     process_arguments()
 
     status = process_config_file()
@@ -32,9 +28,8 @@ def main():
     if not status == "OK":
         print (status)
         sys.exit(3)
-    print CONFIG
-    watch()
-    """
+    watch.set_watch(CONFIG[constants.CONF_SEC_WATCH])
+
 
 if __name__ == "__main__":
     main()

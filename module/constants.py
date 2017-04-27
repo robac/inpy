@@ -1,6 +1,7 @@
-CONFIG_FILE_ARGUMENT = 'config-file'
+ARGUMENT_CONFIG_FILE = 'config-file'
 
-WATCH_SECTION = 'watch'
+CONF_SEC_WATCH      = 'watch'
+CONF_SEC_GENERAL    = 'general'
 
 LOG_CRITICAL = 50
 LOG_ERROR = 40
