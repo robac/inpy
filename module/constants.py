@@ -1,4 +1,8 @@
-ARGUMENT_CONFIG_FILE = 'config-file'
+ARGUMENT_CONFIG_FILE    = 'config-file'
+ARGUMENT_LOG_FILE       = 'log-file'
+ARGUMENT_HAS_ARGUMENT   = 'has-argument'
+ARGUMENT_VALUE          = 'value'
+ARGUMENT_DESCRIPTION    = 'description'
 
 CONF_SEC_WATCH      = 'watch'
 CONF_SEC_GENERAL    = 'general'

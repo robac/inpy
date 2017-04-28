@@ -4,8 +4,11 @@ import inotify.constants
 import logger
 import os
 
+DIR_CREATED = inotify.constants.IN_CREATE | inotify.constants.IN_ISDIR
+
 watches = {}
 kill_now = False
+
 
 def add_watches(adapter, watch_config):
     for watch_key in watch_config.keys():
@@ -18,14 +21,16 @@ def add_watches(adapter, watch_config):
 
 
 def add_watch(adapter, path, recursive=False):
-    adapter.add_watch(path, inotify.constants.IN_CREATE | inotify.constants.IN_ISDIR)
+    adapter.add_watch(path, DIR_CREATED)
     watches[path] = {
-            'recursive': recursive
+            constants.CONF_ITEM_RECURSIVE: recursive
         }
     logger.log(constants.LOG_INFO, "added watch " + path)
 
 
 def add_recursive_watch(adapter, path):
+#slightly modified code of InotifyTree._load_tree
+#https://github.com/dsoprea/PyInotify
     q = [path]
     while q:
         current_path = q[0]
@@ -53,8 +58,8 @@ def watch_loop(adapter):
         for event in adapter.event_gen():
             if event is not None:
                 (header, type_names, watch_path, filename) = event
-                if (header.mask & (inotify.constants.IN_ISDIR | inotify.constants.IN_CREATE)) > 0:
-                    if watches[watch_path]['recursive']:
+                if (header.mask & (DIR_CREATED)) > 0:
+                    if watches[watch_path][constants.CONF_ITEM_RECURSIVE]:
                         add_watch(adapter, os.path.join(watch_path, filename), True)
 
     finally:

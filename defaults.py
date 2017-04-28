@@ -1,3 +1,4 @@
+"""
 DEFAULT_ARGUMENTS = {
    'config-file' : 
 	{
@@ -12,3 +13,21 @@ DEFAULT_ARGUMENTS = {
 		'has-argument' : False
 	}
 }
+"""
+from module import constants
+
+DEFAULT_ARGUMENTS = {
+   constants.ARGUMENT_CONFIG_FILE:
+	{
+		constants.ARGUMENT_VALUE 		: '/etc/inpy/config.yml',
+		constants.ARGUMENT_DESCRIPTION 	: 'path to config file',
+		constants.ARGUMENT_HAS_ARGUMENT : True
+	},
+   constants.ARGUMENT_LOG_FILE:
+	{
+		constants.ARGUMENT_VALUE       	: '/var/log/inpy.log',
+		constants.ARGUMENT_DESCRIPTION 	: 'path to log file',
+		constants.ARGUMENT_HAS_ARGUMENT : False
+	}
+}
+
