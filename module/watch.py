@@ -29,7 +29,7 @@ def add_watch(adapter, path, recursive=False):
 
 
 def add_recursive_watch(adapter, path):
-#slightly modified code of InotifyTree._load_tree
+#slightly modified code of InotifyTree._load_tree from
 #https://github.com/dsoprea/PyInotify
     q = [path]
     while q:

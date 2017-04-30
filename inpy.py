@@ -7,6 +7,8 @@ from module import logger
 from module import constants
 from module import watch
 import inotify.adapters
+from test import testconfig
+from module import tools
 
 
 ARGUMENTS = {}
@@ -22,6 +24,10 @@ def process_config_file():
     return status
 
 def main():
+    print tools.event_mask_from_text('IN_CREATE, IN_ISDIR      ')
+    sys.exit()
+
+
     logger.init_syslogger(constants.LOG_INFO)
     logger.log(constants.LOG_INFO, "start inpy")
 

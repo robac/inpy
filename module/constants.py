@@ -1,13 +1,18 @@
+import inotify.constants
+
+EVENT_LOOKUP = dict((k, v) for v, k in inotify.constants.MASK_LOOKUP.iteritems())
+
 ARGUMENT_CONFIG_FILE    = 'config-file'
 ARGUMENT_LOG_FILE       = 'log-file'
 ARGUMENT_HAS_ARGUMENT   = 'has-argument'
 ARGUMENT_VALUE          = 'value'
 ARGUMENT_DESCRIPTION    = 'description'
 
-CONF_SEC_WATCH      = 'watch'
-CONF_SEC_GENERAL    = 'general'
-CONF_ITEM_DIRECTORY = 'directory'
-CONF_ITEM_RECURSIVE = 'recursive'
+CONF_SEC_WATCH          = 'watch'
+CONF_SEC_GENERAL        = 'general'
+CONF_ITEM_DIRECTORY     = 'directory'
+CONF_ITEM_RECURSIVE     = 'recursive'
+CONF_EVENT_SEPARATOR    = ','
 
 LOG_CRITICAL = 50
 LOG_ERROR = 40

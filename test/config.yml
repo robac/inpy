@@ -5,6 +5,7 @@ watch:
       directory : /var/lib/tftpboot
       recursive : True
       max-depth : 2
+      event     : IN_CREATE
 
   #- hello2:
    #   directory : /root
