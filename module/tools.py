@@ -2,10 +2,13 @@ import constants
 
 def event_mask_from_text(text, separator = constants.CONF_EVENT_SEPARATOR):
     values = str.split(text, separator)
-    values = [ x.strip() for x in values]
+    values = [ v.strip() for v in values]
 
+    mask = 0
+    for v in values:
+        if v in constants.EVENT_LOOKUP:
+            mask = mask | constants.EVENT_LOOKUP[v]
+        else:
+            raise Exception("Chyba")
 
-    #for v in values:
-     #   if
-
-    return values
+    return mask
