@@ -12,3 +12,8 @@ def event_mask_from_text(text, separator = constants.CONF_EVENT_SEPARATOR):
             raise Exception("Chyba")
 
     return mask
+
+def process_action(event_action):
+    elements = str.split(event_action, ":")
+    print len(elements)
+    #return events, action

@@ -30,6 +30,9 @@ def main():
 
     process_arguments()
     status = process_config_file()
+    print CONFIG
+    sys.exit();
+
     print status
     if not status == "OK":
         print (status)

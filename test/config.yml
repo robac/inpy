@@ -5,8 +5,9 @@ watch:
       directory : /var/lib/tftpboot
       recursive : True
       max-depth : 2
-      event     : IN_CREATE
-      action    : python /root/project/inpy/test/test_action.py
+      action    :
+        - IN_CREATE: python /root/project/inpy/test/test_action.py
+        - INneco neco
 
   #- hello2:
    #   directory : /root

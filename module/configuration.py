@@ -20,6 +20,12 @@ def transform_watch_section(config):
     config[constants.CONF_SEC_WATCH] = new_watch
 
 
+def process_action(event_action):
+    elements = str.split(event_action, ":")
+    print len(elements)
+    #return events, action
+
+
 def check_config(config):
     return "OK"
 
