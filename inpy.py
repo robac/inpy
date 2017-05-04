@@ -29,7 +29,7 @@ def main():
     logger.log(constants.LOG_INFO, "start inpy")
 
     process_arguments()
-    status = process_config_file()
+    process_config_file()
     print CONFIG
     sys.exit();
 
