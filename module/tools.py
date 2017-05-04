@@ -14,6 +14,7 @@ def event_mask_from_text(text, separator = constants.CONF_EVENT_SEPARATOR):
 
     return mask
 
+
 def get_all_events_regexp():
     start = True
     for k in constants.EVENT_LOOKUP:
@@ -24,9 +25,15 @@ def get_all_events_regexp():
             res += '|'+k
     return res
 
+
 def validate_action(text):
-    pattern = constants.ACTION_REGEXP.format(get_all_events_regexp)
-    re.search(pattern, text)
+    pattern = constants.ACTION_REGEXP.format(get_all_events_regexp())
+    print pattern
+    match = re.search(pattern, text)
+    if match is None:
+        return False
+    else:
+        return True
 
 
 def process_action(event_action):
@@ -34,4 +41,3 @@ def process_action(event_action):
     print len(elements)
     #return events, action
 
-get_all_events_regexp()

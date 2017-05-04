@@ -2,7 +2,7 @@ import inotify.constants
 
 EVENT_LOOKUP  = dict((k, v) for v, k in inotify.constants.MASK_LOOKUP.iteritems())
 
-ACTION_REGEXP = r"^\s*((IN_CREATE|IN_NECO|IN_MASTO)\s*,\s*)*(IN_CREATE|IN_NECO|IN_MASTO):.*$"
+ACTION_REGEXP = '^\s*({0})(\s*,\s*({0}))*\s*:.*$'
 
 ARGUMENT_CONFIG_FILE    = 'config-file'
 ARGUMENT_LOG_FILE       = 'log-file'
