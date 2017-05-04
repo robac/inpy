@@ -1,15 +1,16 @@
 import yaml
 import constants
+import exception
 
 def read_config_file(file):
     with open(file, 'r') as stream:
         try:
             config = yaml.load(stream)
-            status = "OK"
         except yaml.YAMLError as exc:
             config = {}
-            status = exc.message
-    return status, config
+            raise exception.ConfigurationError()
+
+    return config
 
 def transform_watch_section(config):
     new_watch = {}

@@ -1,4 +1,5 @@
 import constants
+import re
 
 def event_mask_from_text(text, separator = constants.CONF_EVENT_SEPARATOR):
     values = str.split(text, separator)
@@ -13,7 +14,24 @@ def event_mask_from_text(text, separator = constants.CONF_EVENT_SEPARATOR):
 
     return mask
 
+def get_all_events_regexp():
+    start = True
+    for k in constants.EVENT_LOOKUP:
+        if start:
+            start = False
+            res = k
+        else:
+            res += '|'+k
+    return res
+
+def validate_action(text):
+    pattern = constants.ACTION_REGEXP.format(get_all_events_regexp)
+    re.search(pattern, text)
+
+
 def process_action(event_action):
     elements = str.split(event_action, ":")
     print len(elements)
     #return events, action
+
+get_all_events_regexp()
