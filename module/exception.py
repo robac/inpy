@@ -2,6 +2,6 @@ class InpyError(Exception):
     pass
 
 class ConfigurationError(InpyError):
-    def __init__(self, expr, msg):
-        self.expr = expr
-        self.msg = msg
+    def __init__(self, message, detail):
+        self.message = message
+        self.detail = detail

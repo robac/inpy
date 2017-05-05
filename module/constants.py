@@ -26,4 +26,5 @@ LOG_NOTSET = 0
 LOGTO_SYSLOG = 1
 LOGTO_FILELOG = 2
 
-ERROR_LOADING_YAML_FILE = 'Error loading YAML file %s'
+ERROR_LOADING_YAML_FILE_MSG = 'Error loading YAML file {}.'
+ERROR_LOADING_YAML_FILE_DET = 'Reason: {}. Line: {}. Column: {}'

@@ -10,6 +10,7 @@ import inotify.adapters
 import inotify.constants
 from test import testconfig
 from module import tools
+from module import exception
 
 
 ARGUMENTS = {}
@@ -21,23 +22,24 @@ def process_arguments():
 
 def process_config_file():
     global CONFIG
-    status, CONFIG = configuration.process_config_file(ARGUMENTS[constants.ARGUMENT_CONFIG_FILE])
-    return status
+    CONFIG = configuration.process_config_file(ARGUMENTS[constants.ARGUMENT_CONFIG_FILE])
 
 def main():
     logger.init_syslogger(constants.LOG_INFO)
     logger.log(constants.LOG_INFO, "start inpy")
 
-    process_arguments()
-    process_config_file()
-    print CONFIG
-    sys.exit();
-
-    print status
-    if not status == "OK":
-        print (status)
+    try:
+        process_arguments()
+        process_config_file()
+        print CONFIG
+    except exception.ConfigurationError as exc:
+        print exc.message
+        print exc.detail
         sys.exit(3)
-    watch.watch(CONFIG[constants.CONF_SEC_WATCH])
+
+
+
+    #watch.watch(CONFIG[constants.CONF_SEC_WATCH])
 
     logger.log(constants.LOG_INFO, "close inpy")
 

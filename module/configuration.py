@@ -8,8 +8,14 @@ def read_config_file(file):
             config = yaml.load(stream)
         except yaml.YAMLError as exc:
             config = {}
-            raise exception.ConfigurationError()
-
+            print exc.context_mark.name
+            raise exception.ConfigurationError(
+                constants.ERROR_LOADING_YAML_FILE_MSG.format(exc.context_mark.name),
+                constants.ERROR_LOADING_YAML_FILE_DET.format(
+                    exc.problem,
+                    exc.context_mark.line,
+                    exc.context_mark.column
+            ))
     return config
 
 def transform_watch_section(config):
@@ -24,20 +30,19 @@ def transform_watch_section(config):
 def process_action(event_action):
     elements = str.split(event_action, ":")
     print len(elements)
-    #return events, action
+
 
 
 def check_config(config):
-    return "OK"
+    return True
 
 def process_config_file(file):
-    status, config = read_config_file(file)
-    if not status == "OK":
-        return status, config
+    config = read_config_file(file)
+
     transform_watch_section(config)
 
     valid = check_config(config)
-    if not valid == "OK":
-        status = valid
-    return status, config
+    if not valid:
+        raise exception.ConfigurationError("Not valis")
+    return config
 

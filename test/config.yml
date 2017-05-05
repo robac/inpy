@@ -3,11 +3,11 @@ general:
 watch:
   - hello:
       directory : /var/lib/tftpboot
-      recursive : True
+     recursive : True
       max-depth : 2
       action    :
-        - IN_CREATE: python /root/project/inpy/test/test_action.py
-        - INneco neco
+        - IN_CREATE, in_max python /root/project/inpy/test/test_action.py
+        - IN: neco neco
 
   #- hello2:
    #   directory : /root
