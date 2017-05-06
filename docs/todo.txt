@@ -1,0 +1,6 @@
+TODO
+====
+
+ module/configuration.py
+ read_config_file()
+   - process YAMLError into ConfigurationError (exact position in YAML file)
