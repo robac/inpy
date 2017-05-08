@@ -1,6 +1,7 @@
 import yaml
 import constants
 import exception
+from pprint import  pprint
 
 def read_config_file(file):
     with open(file, 'r') as stream:
@@ -8,7 +9,7 @@ def read_config_file(file):
             config = yaml.load(stream)
         except yaml.YAMLError as exc:
             config = {}
-            print exc.context_mark.name
+            """
             raise exception.ConfigurationError(
                 constants.ERROR_LOADING_YAML_FILE_MSG.format(exc.context_mark.name),
                 constants.ERROR_LOADING_YAML_FILE_DET.format(
@@ -16,10 +17,18 @@ def read_config_file(file):
                     exc.context_mark.line,
                     exc.context_mark.column
             ))
+            """
+            raise exception.ConfigurationError("error loading configuration file", "")
     return config
+
+def transform_action_section(action):
+    new_action = []
+    for
+
 
 def transform_watch_section(config):
     new_watch = {}
+    print config
     print (config[constants.CONF_SEC_WATCH][0].keys()[0])
     for watch_item in config[constants.CONF_SEC_WATCH]:
         key = watch_item.keys()[0]

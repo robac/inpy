@@ -10,10 +10,17 @@ ARGUMENT_HAS_ARGUMENT   = 'has-argument'
 ARGUMENT_VALUE          = 'value'
 ARGUMENT_DESCRIPTION    = 'description'
 
+#configuration file
+#section names
 CONF_SEC_WATCH          = 'watch'
 CONF_SEC_GENERAL        = 'general'
+CONF_SEC_WATCH          = 'action'
+
+#item names
 CONF_ITEM_DIRECTORY     = 'directory'
 CONF_ITEM_RECURSIVE     = 'recursive'
+
+#event separator in action section
 CONF_EVENT_SEPARATOR    = ','
 
 LOG_CRITICAL = 50
