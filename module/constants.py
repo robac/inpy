@@ -14,7 +14,7 @@ ARGUMENT_DESCRIPTION    = 'description'
 #section names
 CONF_SEC_WATCH          = 'watch'
 CONF_SEC_GENERAL        = 'general'
-CONF_SEC_WATCH          = 'action'
+CONF_SEC_ACTION         = 'action'
 
 #item names
 CONF_ITEM_DIRECTORY     = 'directory'

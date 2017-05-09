@@ -31,6 +31,7 @@ def main():
     try:
         process_arguments()
         process_config_file()
+        print 'main'
         print CONFIG
     except exception.ConfigurationError as exc:
         print exc.message

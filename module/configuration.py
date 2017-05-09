@@ -1,6 +1,7 @@
 import yaml
 import constants
 import exception
+import tools
 from pprint import  pprint
 
 def read_config_file(file):
@@ -21,18 +22,21 @@ def read_config_file(file):
             raise exception.ConfigurationError("error loading configuration file", "")
     return config
 
-def transform_action_section(action):
-    new_action = []
-    for
+def transform_action_section(watch_item):
+    new_action = {}
+    for action_item in watch_item[constants.CONF_SEC_ACTION]:
+        key = action_item.keys()[0]
+        new_action[tools.event_mask_from_text(key)] = action_item[key]
+    return new_action
 
 
 def transform_watch_section(config):
     new_watch = {}
     print config
-    print (config[constants.CONF_SEC_WATCH][0].keys()[0])
     for watch_item in config[constants.CONF_SEC_WATCH]:
         key = watch_item.keys()[0]
         new_watch[key] = watch_item[key]
+        new_watch[key][constants.CONF_SEC_ACTION] = transform_action_section(new_watch[key])
     config[constants.CONF_SEC_WATCH] = new_watch
 
 

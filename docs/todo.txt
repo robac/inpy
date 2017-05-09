@@ -1,6 +1,11 @@
 TODO
 ====
 
+ all files:
+   - change all "" to '' (where possible)
+
  module/configuration.py
  read_config_file()
    - process YAMLError into ConfigurationError (exact position in YAML file)
+
+
